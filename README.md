@@ -1,6 +1,6 @@
 # MAGDRIVE – Ride Sharing System (Backend)
 
-This project is a partial implementation (~30%) of a ride-sharing backend system built with Flask and PostgreSQL. It includes basic functionality such as fare estimation and ride management, following a microservice-inspired modular structure.
+
 
 ---
 
