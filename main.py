@@ -7,7 +7,7 @@ from app.routes.ride import ride_bp
 app = create_app()
 CORS(app)
 
-# Регистрируем маршруты
+#register routes
 app.register_blueprint(fare_bp)
 app.register_blueprint(ride_bp)
 
