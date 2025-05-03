@@ -1,6 +1,6 @@
 # MAGDRIVE – Ride Sharing System (Backend)
 
-
+This project is a partial implementation (~30%) of a ride-sharing backend system built with Flask and PostgreSQL. It includes basic functionality such as fare estimation and ride management, following a microservice-inspired modular structure.
 
 ---
 
@@ -12,48 +12,55 @@
 - **PostgreSQL**
 - **Flask-CORS**
 - **UUID**
-- **Random module (for mocked fare + ETA)**
+- **Random (for mocked fare + ETA)**
 
 ---
 
-##  Setup Instructions
+## 📦 Setup Instructions
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/magdrive-backend.git
-   cd magdrive-backend
+### 1. Clone the Repository
 
-Create a virtual environment:
-
+```bash
+git clone https://github.com/jaxylykovm/magdrive-backend.git
+cd magdrive-backend
+2. Create a Virtual Environment
 bash
+Копировать
 python3 -m venv venv
 source venv/bin/activate
-Install dependencies:
-
+3. Install Dependencies
 bash
+Копировать
 pip install -r requirements.txt
-Set up PostgreSQL:
-Make sure a database named magdrive exists and user has access.
-
-Run the server:
+4. Setup PostgreSQL
+Make sure you have a PostgreSQL server running and a database named magdrive created:
 
 bash
-python main.py
+Копировать
+psql -U <your-username>
+CREATE DATABASE magdrive;
+Update the connection string in config.py if necessary.
 
-API Endpoints
+5. Run the Server
+bash
+Копировать
+python main.py
+The server will start at http://localhost:5000
+
+📬 API Endpoints
 1. Estimate Fare
 POST /fare
 
-Request Body:
-
+Request Body
 json
+Копировать
 {
   "pickupLocation": "Almaty",
   "destination": "Kaskelen"
 }
-Response:
-
+Response
 json
+Копировать
 {
   "pickup": "Almaty",
   "destination": "Kaskelen",
@@ -65,16 +72,16 @@ json
 2. Create Ride
 POST /rides
 
-Request Body:
-
+Request Body
 json
+Копировать
 {
   "pickupLocation": "Almaty",
   "destination": "Kaskelen"
 }
-Response:
-
+Response
 json
+Копировать
 {
   "ride_id": "uuid",
   "pickup": "Almaty",
@@ -87,16 +94,16 @@ json
 3. Complete Ride
 PATCH /rides/<ride_id>/complete
 
-Response:
-
+Response
 json
+Копировать
 {
   "ride_id": "uuid",
   "status": "completed"
 }
-
 📁 Folder Structure
 arduino
+Копировать
 magdrive-backend/
 │
 ├── app/
@@ -107,6 +114,7 @@ magdrive-backend/
 │   └── routes/
 │       ├── fare.py
 │       └── ride.py
+│
 ├── main.py
 ├── requirements.txt
 └── README.md
