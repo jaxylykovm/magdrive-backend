@@ -1,66 +1,63 @@
-# MAGDRIVE – Ride Sharing System (Backend)
+# MAGDRIVE – Ride Sharing System 
 
-This project is a partial implementation (~30%) of a ride-sharing backend system built with Flask and PostgreSQL. It includes basic functionality such as fare estimation and ride management, following a microservice-inspired modular structure.
+This repository contains a partial backend implementation of the MAGDRIVE ride-sharing service using Flask and PostgreSQL.
+
+
+##  Tech Stack
+
+- Python 3.12  
+- Flask  
+- Flask-SQLAlchemy  
+- PostgreSQL  
+- Flask-CORS  
+- UUID  
+- Random (for mocked fare and ETA)
 
 ---
 
-## 🔧 Tech Stack
+## Setup & Run
 
-- **Python 3.12**
-- **Flask**
-- **Flask-SQLAlchemy**
-- **PostgreSQL**
-- **Flask-CORS**
-- **UUID**
-- **Random (for mocked fare + ETA)**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jaxylykovm/magdrive-backend.git
+   cd magdrive-backend
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Set up PostgreSQL:
+   - Create a database named `magdrive`
+   - Ensure access credentials match those in `app/config.py`
+
+5. Run the server:
+   ```bash
+   python main.py
+   ```
+   The service will run at `http://127.0.0.1:5000`
 
 ---
 
-## 📦 Setup Instructions
+## 📬 API Endpoints
 
-### 1. Clone the Repository
+### 1. Estimate Fare
 
-```bash
-git clone https://github.com/jaxylykovm/magdrive-backend.git
-cd magdrive-backend
-2. Create a Virtual Environment
-bash
-Копировать
-python3 -m venv venv
-source venv/bin/activate
-3. Install Dependencies
-bash
-Копировать
-pip install -r requirements.txt
-4. Setup PostgreSQL
-Make sure you have a PostgreSQL server running and a database named magdrive created:
-
-bash
-Копировать
-psql -U <your-username>
-CREATE DATABASE magdrive;
-Update the connection string in config.py if necessary.
-
-5. Run the Server
-bash
-Копировать
-python main.py
-The server will start at http://localhost:5000
-
-📬 API Endpoints
-1. Estimate Fare
+```http
 POST /fare
+Content-Type: application/json
 
-Request Body
-json
-Копировать
+Body:
 {
   "pickupLocation": "Almaty",
   "destination": "Kaskelen"
 }
-Response
-json
-Копировать
+
+Response 200:
 {
   "pickup": "Almaty",
   "destination": "Kaskelen",
@@ -69,21 +66,23 @@ json
   "currency": "KZT",
   "timestamp": "2025-05-03T15:55:35.274493"
 }
-2. Create Ride
-POST /rides
+```
 
-Request Body
-json
-Копировать
+### 2. Create Ride
+
+```http
+POST /rides
+Content-Type: application/json
+
+Body:
 {
   "pickupLocation": "Almaty",
   "destination": "Kaskelen"
 }
-Response
-json
-Копировать
+
+Response 201:
 {
-  "ride_id": "uuid",
+  "ride_id": "0f47ad96-3b38-47db-9940-5bf038ccf82b",
   "pickup": "Almaty",
   "destination": "Kaskelen",
   "fare": 3900.00,
@@ -91,21 +90,26 @@ json
   "currency": "KZT",
   "status": "requested"
 }
-3. Complete Ride
+```
+
+### 3. Complete Ride
+
+```http
 PATCH /rides/<ride_id>/complete
 
-Response
-json
-Копировать
+Response 200:
 {
-  "ride_id": "uuid",
+  "ride_id": "0f47ad96-3b38-47db-9940-5bf038ccf82b",
   "status": "completed"
 }
-📁 Folder Structure
-arduino
-Копировать
+```
+
+---
+
+## 📁 Project Structure
+
+```
 magdrive-backend/
-│
 ├── app/
 │   ├── __init__.py
 │   ├── config.py
@@ -114,7 +118,11 @@ magdrive-backend/
 │   └── routes/
 │       ├── fare.py
 │       └── ride.py
-│
 ├── main.py
 ├── requirements.txt
 └── README.md
+```
+
+---
+
+
